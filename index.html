@@ -1,0 +1,89 @@
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Color scale generator</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="dist/main.css">
+  </head>
+
+  <body class="h-full bg-gray-50">
+    <div class="flex flex-col justify-center min-h-full py-12 sm:px-6 lg:px-8">
+      <div class="sm:w-full sm:max-w-md sm:mx-auto">
+        <img class="w-auto h-12 mx-auto" src="dist/logo.svg" alt="Nodalview">
+        <h2 class="mt-6 text-gray-900 font-bold text-3xl text-center tracking-tight">Color scale generator</h2>
+        <p class="mt-2 text-gray-600 text-sm text-center">Generate bezier-interpolated color scales in the Lab space.</p>
+      </div>
+
+      <div class="mt-8 sm:w-full sm:max-w-md sm:mx-auto">
+        <!-- Card -->
+        <div class="shadow sm:overflow-hidden sm:rounded-md">
+          <!-- Body -->
+          <div class="py-5 px-4 bg-white space-y-6 sm:p-6">
+            <div>
+              <label for="color" class="block text-sm font-medium leading-6 text-gray-900">Main color</label>
+              <div class="mt-2">
+                <input type="text" id="color" autofocus required class="js-color block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="E.g.: #FF0000">
+              </div>
+            </div>
+            <div>
+              <button type="submit" class="js-submit flex justify-center w-full py-2 px-4 rounded-md border border-transparent bg-primary-500 text-white font-medium text-sm shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">Generate color scale</button>
+            </div>
+          </div><!-- /Body -->
+
+          <!-- Footer -->
+          <div class="py-5 px-4 bg-gray-50 sm:px-6">
+            <span class="block text-gray-700 font-medium text-sm">Result:</span>
+            <!-- <div class="grid grid-cols-4 gap-2 mt-1 js-result"></div> -->
+            <div class="flex flex-col mt-1 space-y-2 js-result"></div>
+          </div><!-- /Footer -->
+        </div><!-- /Card -->
+      </div>
+    </div>
+
+    <!-- Alert -->
+    <div class="flex items-end fixed inset-0 py-6 px-4 pointer-events-none sm:p-6 js-alert"
+    x-data="{ show: false }"
+    x-on:show="show = true"
+    x-on:hide="show = false">
+      <div class="flex flex-col items-end w-full space-y-4">
+        <div class="w-full max-w-sm rounded-lg bg-white ring-1 ring-black ring-opacity-5 overflow-hidden pointer-events-auto shadow-lg"
+          x-show="show"
+          x-transition:enter="transform ease-out duration-300 transition"
+          x-transition:enter-start="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+          x-transition:enter-end="translate-y-0 opacity-100 sm:translate-x-0"
+          x-transition:leave="transition ease-in duration-100"
+          x-transition:leave-start="opacity-100"
+          x-transition:leave-end="opacity-0">
+          <div class="p-4">
+            <div class="flex items-start">
+              <div class="flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-6 h-6 text-green-400" aria-hidden="true">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+
+              <div class="flex-1 w-0 ml-3 pt-0.5">
+                <p class="text-gray-900 text-sm">Color scale copied to clipboard!</p>
+              </div>
+
+              <div class="flex flex-shrink-0 ml-4">
+                <button class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-400"
+                  @click="show = false">
+                  <span class="sr-only">Close</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5" aria-hidden="true">
+                    <path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" fill-rule="evenodd" clip-rule="evenodd" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /Alert -->
+
+    <script src="dist/main.js"></script>
+  </body>
+</html>

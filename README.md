@@ -1,2 +1,3 @@
-# color-scale-generator
-A simple tool to interpolate color scales in the Lab space.
+# Color scale generator
+Interpolate color scales from a single color in the Lab space.
+To get started, just run `npm install` and `npm run build`.
