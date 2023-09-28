@@ -14,7 +14,24 @@ const BASE_COLOR_CLASSES = ['outline', 'outline-offset-2', 'outline-2',  'outlin
 // Elements
 const colorInput = document.querySelector('.js-color')
 const result = document.querySelector('.js-result')
+const hiddenInput = document.querySelector('.js-hidden-input')
 const submitButton = document.querySelector('.js-submit')
+const alert = document.querySelector('.js-alert')
+
+function copyToClipboard(input) {
+  input.select()
+  navigator.clipboard.writeText(input.value)
+}
+
+function toggleAlert(element) {
+  const showEvent = new Event('show')
+  element.dispatchEvent(showEvent)
+
+  setTimeout(function() {
+    const hideEvent = new Event('hide')
+    element.dispatchEvent(hideEvent)
+  }, 3000)
+}
 
 function generateLightestColor(baseColor) {
   return chroma(baseColor).luminance(0.95)
@@ -67,4 +84,8 @@ submitButton.addEventListener('click', (event) => {
   const colorScale = generateColorScale(colorArray)
 
   showResult(colorScale)
+
+  hiddenInput.value = colorScale
+  copyToClipboard(hiddenInput)
+  toggleAlert(alert)
 })
