@@ -8,8 +8,7 @@ Alpine.start()
 const COLOR_SCALE_LENGTH = 11
 const BASE_COLOR_INDEX = 6
 const COLOR_NAMES = ['25', '50', '100', '200', '300', '400', '500', '600', '700', '800', '900']
-const COLOR_CLASSES = ['flex', 'justify-between', 'px-4', 'py-2', 'rounded']
-const COLOR_INFO_CLASSES = ['text-white', 'text-sm', 'mix-blend-difference']
+const COLOR_CLASSES = ['color', 'flex', 'justify-between', 'px-4', 'py-2', 'rounded', 'text-sm']
 const BASE_COLOR_CLASSES = ['outline', 'outline-offset-2', 'outline-2',  'outline-primary-500']
 
 // Elements
@@ -39,14 +38,14 @@ function showResult(colorScale) {
     const div = document.createElement('div')
 
     strong.innerHTML = COLOR_NAMES[i]
-    strong.classList.add(...COLOR_INFO_CLASSES)
-
     span.innerHTML = colorScale[i]
-    span.classList.add(...COLOR_INFO_CLASSES)
+
+    const textColor = chroma.contrast(colorScale[i], '#FFFFFF') > 4.5 ? '#FFFFFF' : '#000000'
 
     div.append(strong, span)
     div.classList.add(...COLOR_CLASSES)
     div.style.backgroundColor = colorScale[i]
+    div.style.color = textColor
 
     if (i === BASE_COLOR_INDEX) {
       div.classList.add(...BASE_COLOR_CLASSES)
